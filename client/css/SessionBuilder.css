@@ -1,0 +1,83 @@
+/* CSS declarations go here */
+body{
+	font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue';
+}
+
+#left{
+	border-right: 1px solid black;
+}
+#paper-deck, #session-list{
+	background-color: #eee;
+	height: 500px;
+	overflow: auto;
+	list-style: none;
+	list-style-type: none;
+	padding-left: 0px;
+}
+
+h3{
+	border-bottom: 1px solid black;
+	/*width: 50%;*/
+}
+
+.session{
+	border: 1px solid black;
+	background-color: #eee;
+	padding-left: 5px;
+	padding-right: 5px;
+	cursor: move;
+}
+
+.session .form-group{
+	font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue';
+	margin: 5px;
+	font-size: 14px;
+}
+
+.session-label{
+	text-shadow: 1px 1px #ddd;
+}
+
+.session .input-sm{
+	font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue';
+	font-size: 14px;
+}
+
+i {
+	cursor: pointer;
+}
+
+.session-papers{
+	height: 100%;
+	list-style: none;
+	list-style-type: none;
+	padding-left: 0px;
+}
+.paper{
+	font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue';
+	border: solid 1px black;
+	margin: 5px;
+	padding: 5px;
+	background-color: #fff;
+	cursor: pointer;
+}
+
+.session .paper{
+	margin: 5px 0px 0px 0px; 
+}
+
+#new-session{
+	border: dotted 1px black;
+	font-size: 17px;
+	text-align: center;
+	/*border-radius: 5px;*/
+	padding: 10px;
+}
+
+.name-session{
+	width: 100%;
+}
+
+/*#clusterprompt{
+	margin-top: 20px;
+}*/

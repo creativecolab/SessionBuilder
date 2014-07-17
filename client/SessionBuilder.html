@@ -1,0 +1,89 @@
+<head>
+  <title>SessionBuilder</title>
+</head>
+
+<body>
+  {{> SessionBuilder}}
+</body>
+
+<template name="SessionBuilder">
+	<div class="session-builder container-fluid clusterinterface">
+		<div class="row">
+			<div id="left" class="col-md-3">
+				<!-- <div>
+						<span>Total Sessions: {{numClusters}}</span>
+						<br/>
+						<span>Unnamed Sessions: {{numUnnamed}}</span>
+				</div> -->
+				<!--Create New Session-->
+				<h3>Create New Session</h3>
+				<ul id="new-session" class="ui-sortable">
+					Drag Paper here to create a new Session
+				</ul>
+				<!--End Create New Session-->
+
+				<!--Paper List-->
+				<div>
+					<h3 id="paperlist-header">Paper List</h3>
+					<!-- <div class="btn-group">
+						<button id="sortMenuButton" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+							Sort By
+					    	<span class="caret"></span>
+					    	<span class="sr-only">Toggle Dropdown</span>
+					  	</button>
+					  	<ul class="dropdown-menu" role="menu">
+					    	<li><a href="" id="sortOldest">Oldest</a></li>
+					    	<li><a href="" id="sortMostRecent">Most Recent</a></li>
+					  	</ul>
+					</div> -->
+				</div>
+
+				<ul id="paper-deck" class="deck ui-sortable">
+					<li class="sort-disabled"></li>
+					{{#each papers}}
+						{{> paper}}
+					{{/each}}
+				</ul>
+				<!--End Idea List-->
+
+				<h3>Session List</h3>
+				<ul id="session-list">
+					{{#each sessions}}
+						<li id="si-{{this._id}}" class="paper">{{this.name}}</li>
+					{{/each}}
+				</ul>
+			</div>
+
+			<div id="right" class="col-md-9 container-fluid">
+				<div class="row">
+					<div class="col-md-12"><h3>Sessions</h3></div>
+				</div>
+				<div  id="sessionarea">
+					{{#each sessions}}
+						{{> session}}
+					{{/each}}
+				</div>
+			</div>
+		</div>
+    </div>
+</template>
+
+<template name="paper">
+	<li id={{this._id}} class="paper"><a href="">[Abs]</a> {{this.title}} <!-- <i class="sort-disabled fa fa-lg {{#if gameChangerStatus}} fa-star {{else}} fa-star-o {{/if}} gamechangestar"></i> --></li>
+</template>
+
+<template name="session">
+	<div class="session col-md-3" id={{this._id}} style="position: absolute; top:{{position.top}}px; left:{{position.left}}px">
+		<div class="form-group form-group-inline">
+			<i class="fa fa-lg {{#if isCollapsed}}fa-angle-double-right{{else}}fa-angle-double-down{{/if}} collapser"></i>
+			<span class="session-label {{named}} sort-disabled">{{this.name}}</span>
+		</div>
+		<ul class="session-papers {{#if isCollapsed}} hidden {{else}} show {{/if}}" id={{_id}}>
+			<input type="text" class="name-session form-control input-sm sort-disabled" 
+				placeholder="Name this cluster"/>
+			{{#each sessionPapers}}
+				{{> paper}}
+			{{/each}}
+		</ul>
+	</div>
+</template>
