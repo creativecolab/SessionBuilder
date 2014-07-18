@@ -10,13 +10,13 @@
 	<div class="session-builder container-fluid clusterinterface">
 		<div class="row">
 			<div id="left" class="col-md-3">
-				<!-- <div>
-						<span>Total Sessions: {{numClusters}}</span>
-						<br/>
-						<span>Unnamed Sessions: {{numUnnamed}}</span>
-				</div> -->
+				<!-- <nav id="menu" class="panel" role="navigation">
+				<h3>Directions</h3>
+			</nav> -->
 				<!--Create New Session-->
-				<h3>Create New Session</h3>
+				<h3>Create New Session
+					<!-- <a id="directions-icon" href="#menu" class="menu-link"><i class="fa fa-question-circle"></i></a> -->
+				</h3>
 				<ul id="new-session" class="ui-sortable">
 					Drag Paper here to create a new Session
 				</ul>
@@ -49,14 +49,18 @@
 				<h3>Session List</h3>
 				<ul id="session-list">
 					{{#each sessions}}
-						<li id="si-{{this._id}}" class="paper">{{this.name}}</li>
+						<li id="si-{{this._id}}" class="paper session-item">{{this.name}}</li>
 					{{/each}}
 				</ul>
 			</div>
 
 			<div id="right" class="col-md-9 container-fluid">
 				<div class="row">
-					<div class="col-md-12"><h3>Sessions</h3></div>
+					<div class="col-md-12">
+						<h3>Sessions
+							<span id="session-count">Total Sessions: {{numSessions}} | Unnamed Sessions: {{numUnnamed}}</span>
+						</h3>
+					</div>
 				</div>
 				<div  id="sessionarea">
 					{{#each sessions}}

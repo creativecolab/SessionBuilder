@@ -4,6 +4,7 @@ Session.set("sortByTime", -1);
 * Attaches sortable to idea and cluster lists, new cluster area.
 ********************************************************************/
 Template.SessionBuilder.rendered = function(){
+  //$('.menu-link').bigSlide();
   //Attach sortable to the new session creation drop area
   $('#new-session').sortable({
     items : '',
@@ -96,14 +97,14 @@ Template.SessionBuilder.helpers({
     return session.name;
   },
 
-  // numClusters : function(){
-  //   return Clusters.find({isRoot: {$ne: true}}).count();
-  // },
+  numSessions : function(){
+    return Template.SessionBuilder.sessions().count()
+  },
 
-  // numUnnamed : function(){
-  //   var nullNames = ["Not named yet", "", " ", "  ", "   ", undefined];
-  //   return Clusters.find({isRoot: {$ne: true}, name: {$in: nullNames}}).count();
-  // }
+  numUnnamed : function(){
+    var nullNames = ["Not named yet", "", " ", "  ", "   ", undefined];
+    return Sessions.find({name: {$in: nullNames}}).count();
+  }
 });
 
 /********************************************************************
@@ -157,14 +158,14 @@ Template.SessionBuilder.events({
     IdeasToProcess.update({_id: id}, {$set: {isGamechanger: state}});
   },*/
 
-  /*'click .cluster-item': function(){
+  'click .session-item': function(){
     //console.log(event.target);
     var id = $(event.target).attr("id");
     id = id.split("-")[1];
-    var cluster = Clusters.findOne({_id: id});
-    var top = cluster.position.top;
-    window.scrollTo(0, top+100);
-  },*/
+    var session = Sessions.findOne({_id: id});
+    var top = session.position.top;
+    window.scrollTo(0, top-10);
+  },
 
   /*'click #sortOldest' : function(){
     Session.set("sortByTime", 1);
