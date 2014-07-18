@@ -61,7 +61,6 @@ Template.session.rendered = function(){
         {$addToSet: 
           {papers: myPaperID}
       });
-
       ui.item.remove();
     }
   });
