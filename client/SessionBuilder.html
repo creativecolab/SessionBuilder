@@ -28,18 +28,21 @@
 
 				<!--Paper List-->
 				<div>
-					<h3 id="paperlist-header">Paper List</h3>
-					<!-- <div class="btn-group">
-						<button id="sortMenuButton" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-							Sort By
-					    	<span class="caret"></span>
-					    	<span class="sr-only">Toggle Dropdown</span>
-					  	</button>
-					  	<ul class="dropdown-menu" role="menu">
-					    	<li><a href="" id="sortOldest">Oldest</a></li>
-					    	<li><a href="" id="sortMostRecent">Most Recent</a></li>
-					  	</ul>
-					</div> -->
+					<h3 id="paperlist-header">Paper List
+						<div class="btn-group" id="sortMenuButton" >
+							<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								Sort By
+						    	<span class="caret"></span>
+						    	<span class="sr-only">Toggle Dropdown</span>
+						  	</button>
+						  	<ul class="dropdown-menu" role="menu">
+						  		<li id="sortAZ"><a>A-Z</a></li>
+						  		<li id="sortZA"><a>Z-A</a></li>
+						    	<!-- <li><a href="" id="sortShortest">Shortest First</a></li>
+						    	<li><a href="" id="sortLongest">Longest First</a></li> -->
+						  	</ul>
+						</div>
+					</h3>
 				</div>
 
 				<ul id="paper-deck" class="deck ui-sortable">
@@ -88,7 +91,7 @@
 		</div>
 		<ul class="session-papers {{#if isCollapsed}} hidden {{else}} show {{/if}}" id={{_id}}>
 			<input type="text" class="name-session form-control input-sm sort-disabled" 
-				placeholder="Name this cluster"/>
+				placeholder="Name this Session"/>
 			{{#each sessionPapers}}
 				{{> paper}}
 			{{/each}}

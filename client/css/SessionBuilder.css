@@ -1,12 +1,20 @@
 /* CSS declarations go here */
 body{
 	font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue';
+	height: 100%;
+}
+
+.session-builder{
+	height: 100%;
 }
 
 #left{
+	height: 100%;
 	border-right: 1px solid black;
 	border-bottom: 1px solid black;
-	box-shadow: 1px 0px 5px 1px #eee;
+	/*-webkit-box-shadow: 1px 0px 2px 0px rgba(50, 50, 50, 0.25);
+	-moz-box-shadow:    1px 0px 2px 0px rgba(50, 50, 50, 0.25);
+	box-shadow:         1px 0px 2px 0px rgba(50, 50, 50, 0.25);*/
 }
 
 #directions-icon{
@@ -22,13 +30,26 @@ body{
 
 #paper-deck, #session-list{
 	background-color: #eee;
-	height: 500px;
+	min-height: 200px;
+	max-height: 300px;
 	overflow: auto;
 	list-style: none;
 	list-style-type: none;
 	padding-left: 0px;
 	border-top: 1px solid black; 
 	border-bottom: 1px solid black; 
+}
+
+#sortMenuButton{
+	float:right;
+}
+
+#sortMenuButton button{
+	padding: 1px 5px 1px 5px;
+	border-radius: 2px;
+	border: 1px solid black;
+	box-shadow: 1px 1px 1px 1px #eee;
+	margin-right: 1px;
 }
 
 h3{

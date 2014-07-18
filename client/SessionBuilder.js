@@ -1,4 +1,4 @@
-Session.set("sortByTime", -1);
+Session.set("sort", {sort: {title: -1}});
 
 /********************************************************************
 * Attaches sortable to idea and cluster lists, new cluster area.
@@ -12,7 +12,7 @@ Template.SessionBuilder.rendered = function(){
     receive : function(event, ui){
       var myPaper;
       if(ui.sender.parent().hasClass('session')){
-        console.log(ui.sender);
+        // console.log(ui.sender);
         var myPaperID = $(ui.item).attr('id');
         processSender(ui, myPaperID);
       }
@@ -84,7 +84,8 @@ Template.session.rendered = function(){
 ********************************************************************/
 Template.SessionBuilder.helpers({
   papers : function(){
-    return Papers.find({inSession: {$ne: true}});
+    var sort = Session.get("sort");
+    return Papers.find({inSession: {$ne: true}}, sort);
   },
 
   sessions : function(){
@@ -113,7 +114,6 @@ Template.SessionBuilder.helpers({
 ********************************************************************/
 Template.session.helpers({
   sessionPapers : function(){
-    console.log(this.papers)
     var paperIDs = this.papers;
     return Papers.find({_id: {$in: paperIDs}})
   },
@@ -158,15 +158,6 @@ Template.SessionBuilder.events({
     Sessions.update({_id: id}, {$set: {isCollapsed: !session.isCollapsed}});
   },
 
-  /*'click .gamechangestar' : function(){
-    console.log(this);
-    var id = (this)._id;
-    var idea = IdeasToProcess.findOne({_id: id});
-    var state = !idea.isGamechanger;
-
-    IdeasToProcess.update({_id: id}, {$set: {isGamechanger: state}});
-  },*/
-
   'click .session-item': function(){
     //console.log(event.target);
     var id = $(event.target).attr("id");
@@ -176,13 +167,21 @@ Template.SessionBuilder.events({
     window.scrollTo(0, top-10);
   },
 
-  /*'click #sortOldest' : function(){
-    Session.set("sortByTime", 1);
+  'click #sortAZ' : function(){
+    Session.set("sort", {sort: {title: 1}});
   },
 
-  'click #sortMostRecent' : function(){
-    Session.set("sortByTime", -1);
-  }*/
+  'click #sortZA' : function(){
+    Session.set("sort", {sort: {title: -1}});
+  },
+
+  // 'click #sortShortest' : function(){
+  //   Session.set("sort", {sort: {$size: {title: -1}}});
+  // },
+
+  // 'click #sortLongest' : function(){
+  //   Session.set("sort", {sort: {$size: {title: 1}}});
+  // }
 });
 
 
@@ -192,7 +191,7 @@ Template.SessionBuilder.events({
 function createSession(item) {
   var paperID = item.attr('id');
   var papers = [paperID];
-  var session = new Session(papers);
+  var session = new ConfSession(papers);
   session.position = {top: 55, left:15};
   Sessions.insert(session);
   updatePaper(paperID, true);

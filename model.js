@@ -7,7 +7,7 @@ Paper = function(id, title){
 	this.inSession = false;
 }
 
-Session = function(papers){
+ConfSession = function(papers){
 	this.papers = papers;
 	this.name = "Not named yet";
 	this.position;
