@@ -12,7 +12,7 @@ Template.SessionBuilder.rendered = function(){
       if(ui.sender.parent().hasClass('session')){
         console.log(ui.sender);
         var myPaperID = $(ui.item).attr('id');
-        myPaper = processSender(ui, myPaperID);
+        processSender(ui, myPaperID);
       }
       createSession(ui.item);
       ui.item.remove();
@@ -61,6 +61,8 @@ Template.session.rendered = function(){
         {$addToSet: 
           {papers: myPaperID}
       });
+
+      ui.item.remove();
     }
   });
 

@@ -5,8 +5,8 @@ from datetime import time
 from itertools import islice
 from pymongo import MongoClient
 
-client = MongoClient(sys.argv[1])
-db = client['meteor']
+client = MongoClient(sys.argv[1].rstrip('\n'))
+db = client['sessionbuilder_meteor_com']
 papers = db.papers
 
 with open("./papers.csv", "rU") as csvfile:
