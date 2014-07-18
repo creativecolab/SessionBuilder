@@ -6,10 +6,18 @@ body{
 #left{
 	border-right: 1px solid black;
 	border-bottom: 1px solid black;
+	box-shadow: 1px 0px 5px 1px #eee;
 }
 
 #directions-icon{
 	float: right;
+}
+#directions-icon:hover{
+	color: #999;
+}
+
+#directions{
+	font-size: 16px;
 }
 
 #paper-deck, #session-list{

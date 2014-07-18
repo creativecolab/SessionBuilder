@@ -5,6 +5,7 @@ Session.set("sortByTime", -1);
 ********************************************************************/
 Template.SessionBuilder.rendered = function(){
   //$('.menu-link').bigSlide();
+  $('#directions').hide();
   //Attach sortable to the new session creation drop area
   $('#new-session').sortable({
     items : '',
@@ -132,6 +133,14 @@ Template.session.helpers({
 * Session Builder Event Mappings
 ********************************************************************/
 Template.SessionBuilder.events({
+  'click #directions-icon': function(){
+    $('#directions').slideToggle();
+    if($('#directions-icon').hasClass("fa-question-circle")){
+      $('#directions-icon').switchClass("fa-question-circle", "fa-chevron-circle-up");
+    } else {
+      $('#directions-icon').switchClass("fa-chevron-circle-up", "fa-question-circle");
+    }
+  },
   //updates name field in session as user types
   'keyup .name-session' : function(event, template){
     var $mySession = $(event.target).parent();
