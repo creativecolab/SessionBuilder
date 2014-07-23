@@ -8,13 +8,17 @@ body{
 	height: 100%;
 }
 
-#left{
+#left, #middle{
 	height: 100%;
 	border-right: 1px solid black;
 	border-bottom: 1px solid black;
 	/*-webkit-box-shadow: 1px 0px 2px 0px rgba(50, 50, 50, 0.25);
 	-moz-box-shadow:    1px 0px 2px 0px rgba(50, 50, 50, 0.25);
 	box-shadow:         1px 0px 2px 0px rgba(50, 50, 50, 0.25);*/
+}
+
+#middle{
+	min-height: 808px;
 }
 
 #directions-icon{
@@ -25,13 +29,15 @@ body{
 }
 
 #directions{
+	/*position: absolute;
+	background-color: white;*/
+	opacity: 1;
 	font-size: 16px;
 }
 
 #paper-deck, #session-list{
 	background-color: #eee;
-	min-height: 200px;
-	max-height: 300px;
+	height: 325px;
 	overflow: auto;
 	list-style: none;
 	list-style-type: none;
@@ -41,10 +47,15 @@ body{
 }
 
 #sortMenuButton{
-	float:right;
+	float: right;
+	vertical-align: middle;
 }
 
-#sortMenuButton button{
+#paperlist-buttons{
+	margin-bottom: 5px
+}
+
+.list-buttons button{
 	padding: 1px 5px 1px 5px;
 	border-radius: 2px;
 	border: 1px solid black;

@@ -24,6 +24,9 @@ Template.SessionBuilder.rendered = function(){
   //Attach sortable to the paper list
   $('#paper-deck').sortable({
     items: ">*:not(.sort-disabled)",
+    stop: function(event, ui) {
+      $(this).sortable('cancel');
+    }, //places the paper back in paper list after being dropped somewhere else *******
     connectWith : '#new-session, .session-papers',
     //re-insert paper back into Papers collection if dragged to deck
     receive: function(event, ui){
@@ -35,7 +38,7 @@ Template.SessionBuilder.rendered = function(){
         return false;
       }
       updatePaper(myPaperID, false);
-    }
+    }, 
   });
 }
 
@@ -63,6 +66,11 @@ Template.session.rendered = function(){
         {$addToSet: 
           {papers: myPaperID}
       });
+
+      Papers.update({_id: myPaperID},
+        {$addToSet: 
+          {sessions: mySessionID}
+        })
       ui.item.remove();
     }
   });
@@ -85,7 +93,7 @@ Template.session.rendered = function(){
 Template.SessionBuilder.helpers({
   papers : function(){
     var sort = Session.get("sort");
-    return Papers.find({inSession: {$ne: true}}, sort);
+    return Papers.find({inSession: {$in: [true, false]}});
   },
 
   sessions : function(){

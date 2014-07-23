@@ -13,36 +13,29 @@
 				<!-- <nav id="menu" class="panel" role="navigation">
 				<h3>Directions</h3>
 			</nav> -->
-				<div id="directions">
-					<h3>Directions</h3>
-					<p>Drag Papers from the Paper List to the area below to create a new Session. Drag more papers from the Paper List (or other Sessions) to a Session to add to it. Papers can be dragged back from a Session to the Paper List. Moving all papers from a Session destroys the Session. Sessions can be given a name and spatially arranged by dragging them. Collapse Sessions to save space if need be. A list of currently existing Sessions appears below the Paper List. </p>
-				</div>
-				<!--Create New Session-->
-				<h3>Create New Session
-					<i id="directions-icon" class="fa fa-question-circle"></i>
-				</h3>
-				<ul id="new-session" class="ui-sortable">
-					Drag Paper here to create a new Session
-				</ul>
 				<!--End Create New Session-->
 
 				<!--Paper List-->
 				<div>
 					<h3 id="paperlist-header">Paper List
-						<div class="btn-group" id="sortMenuButton" >
-							<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-								Sort By
-						    	<span class="caret"></span>
-						    	<span class="sr-only">Toggle Dropdown</span>
-						  	</button>
-						  	<ul class="dropdown-menu" role="menu">
-						  		<li id="sortAZ"><a>A-Z</a></li>
-						  		<li id="sortZA"><a>Z-A</a></li>
-						    	<!-- <li><a href="" id="sortShortest">Shortest First</a></li>
-						    	<li><a href="" id="sortLongest">Longest First</a></li> -->
-						  	</ul>
-						</div>
 					</h3>
+				</div>
+				<div id="paperlist-buttons">
+					<i class="fa fa-filter"></i>
+					<span id="filters" class="list-buttons btn-group">
+						<button class="btn btn-info btn-sm ">In Session</button>
+					</span>
+					<span class="list-buttons btn-group" id="sortMenuButton" >
+						<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+							Sort By
+					    	<span class="caret"></span>
+					    	<span class="sr-only">Toggle Dropdown</span>
+					  	</button>
+					  	<ul class="dropdown-menu" role="menu">
+					  		<li id="sortAZ"><a>A-Z</a></li>
+					  		<li id="sortZA"><a>Z-A</a></li>
+					  	</ul>
+					</span>
 				</div>
 
 				<ul id="paper-deck" class="deck ui-sortable">
@@ -61,7 +54,24 @@
 				</ul>
 			</div>
 
-			<div id="right" class="col-md-9 container-fluid">
+			<div id="middle" class="col-md-2">
+				<div id="directions">
+					<h3>Directions</h3>
+					<p>Drag Papers from the Paper List to the area below to create a new Session. Drag more papers from the Paper List (or other Sessions) to a Session to add to it. Papers can be dragged back from a Session to the Paper List. Moving all papers from a Session destroys the Session. Sessions can be given a name and spatially arranged by dragging them. Collapse Sessions to save space if need be. A list of currently existing Sessions appears below the Paper List. </p>
+				</div>
+				<!--Create New Session-->
+				<h3>Create Session
+					<i id="directions-icon" class="fa fa-question-circle"></i>
+				</h3>
+				<ul id="new-session" class="ui-sortable">
+					Drag Paper here to create a new Session
+				</ul>
+				<div id="applied-filter-list">
+					<h3>Applied Filters</h3>
+				</div>
+			</div>
+
+			<div id="right" class="col-md-7 container-fluid">
 				<div class="row">
 					<div class="col-md-12">
 						<h3>Sessions
@@ -84,7 +94,7 @@
 </template>
 
 <template name="session">
-	<div class="session col-md-3" id={{this._id}} style="position: absolute; top:{{position.top}}px; left:{{position.left}}px">
+	<div class="session col-md-4" id={{this._id}} style="position: absolute; top:{{position.top}}px; left:{{position.left}}px">
 		<div class="form-group form-group-inline">
 			<i class="fa fa-lg {{#if isCollapsed}}fa-angle-double-right{{else}}fa-angle-double-down{{/if}} collapser"></i>
 			<span class="session-label {{named}} sort-disabled">{{this.name}}</span>
