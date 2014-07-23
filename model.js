@@ -5,6 +5,7 @@ Paper = function(id, title){
 	this._id = id;
 	this.title = title;
 	this.inSession = false;
+	this.sessions = [];
 }
 
 ConfSession = function(papers){

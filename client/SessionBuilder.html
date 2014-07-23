@@ -23,7 +23,16 @@
 				<div id="paperlist-buttons">
 					<i class="fa fa-filter"></i>
 					<span id="filters" class="list-buttons btn-group">
-						<button class="btn btn-info btn-sm ">In Session</button>
+						<button class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown">
+							{{getSessionFilterText}}
+						<span class="caret"></span>
+					    	<span class="sr-only">Toggle Dropdown</span>
+					  	</button>
+					  	<ul class="dropdown-menu" role="menu">
+					  		<li id="showInSession"><a>In Session</a></li>
+					  		<li id="showNoSession"><a>Not in Session</a></li>
+					  		<li id="showEither"><a>All</a></li>
+					  	</ul>
 					</span>
 					<span class="list-buttons btn-group" id="sortMenuButton" >
 						<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">

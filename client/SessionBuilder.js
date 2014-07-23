@@ -1,4 +1,6 @@
 Session.set("sort", {sort: {title: -1}});
+Session.set("inSessionFilter", [true, false]);
+Session.set("inSession")
 
 /********************************************************************
 * Attaches sortable to idea and cluster lists, new cluster area.
@@ -93,7 +95,19 @@ Template.session.rendered = function(){
 Template.SessionBuilder.helpers({
   papers : function(){
     var sort = Session.get("sort");
-    return Papers.find({inSession: {$in: [true, false]}});
+    var filter = Session.get("inSessionFilter");
+    return Papers.find({inSession: {$in: filter}}, sort);
+  },
+
+  getSessionFilterText : function(){
+    var filter = Session.get("inSessionFilter");
+    if(filter.length > 1)
+      return "All";
+    else if (filter[0] === true) {
+      return "In Session";
+    } else if (filter[0] === false) {
+      return "Not in Session";
+    }
   },
 
   sessions : function(){
@@ -173,6 +187,23 @@ Template.SessionBuilder.events({
     var session = Sessions.findOne({_id: id});
     var top = session.position.top;
     window.scrollTo(0, top-10);
+    $(event.target).css()
+  },
+
+  'click #showInSession' : function(){
+    Session.set("inSessionFilter", [true]);
+  },
+
+  'click #showNoSession' : function(){
+    Session.set("inSessionFilter", [false]);
+  },
+
+  'click #showEither' : function(){
+    Session.set("inSessionFilter", [true,false]);
+  },
+
+  'click #sortZA' : function(){
+    Session.set("sort", {sort: {title: -1}});
   },
 
   'click #sortAZ' : function(){
@@ -211,11 +242,6 @@ function createSession(item) {
 function processSender(ui, paperID){
   var senderID = $(ui.sender).attr('id');
   var sender = Sessions.findOne({_id: senderID});
-    
-  //find all ideas in clusters idea list with matching id (should be one)>need error check here
-  // myIdea = $.grep(sender.papers, function(paper){
-  //   return paper === ideaID;
-  // })[0];
 
   Sessions.update({_id: senderID},
     {$pull:
