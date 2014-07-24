@@ -34,12 +34,13 @@ Template.SessionBuilder.rendered = function(){
     receive: function(event, ui){
       var myPaperID = $(ui.item).attr('id');
       if(ui.sender.hasClass('session-papers')){
-        myPaper = processSender(ui, myPaperID); 
+        mySessionID = processSender(ui, myPaperID); 
       } else {
         alert("unknown sender"); //no way for this to happen
         return false;
       }
-      updatePaper(myPaperID, false);
+      updateInSession(myPaperID, false);
+      updateSessionList(myPaperID, mySessionID, false);
     }, 
   });
 }
@@ -55,7 +56,7 @@ Template.session.rendered = function(){
 
       if ($(ui.sender).hasClass('deck')){
         Papers.findOne({_id: myPaperID});
-        updatePaper(myPaperID, true);
+        updateInSession(myPaperID, true);
 
       //if item is paper coming from another session
       } else if ($(ui.sender).hasClass('session-papers') && 
@@ -69,11 +70,18 @@ Template.session.rendered = function(){
           {papers: myPaperID}
       });
 
-      Papers.update({_id: myPaperID},
-        {$addToSet: 
-          {sessions: mySessionID}
-        })
+      // Papers.update({_id: myPaperID},
+      //   {$addToSet: 
+      //     {sessions: mySessionID}
+      //   })
+      updateSessionList(myPaperID, mySessionID, true);
       ui.item.remove();
+    }, 
+    remove: function(event, ui){
+      var myPaperID = $(ui.item).attr('id');
+      var mySessionID = $(this).attr('id');
+
+      updateSessionList(myPaperID, mySessionID, false);
     }
   });
 
@@ -232,8 +240,9 @@ function createSession(item) {
   var papers = [paperID];
   var session = new ConfSession(papers);
   session.position = {top: 55, left:15};
-  Sessions.insert(session);
-  updatePaper(paperID, true);
+  var sessionID = Sessions.insert(session);
+  updateInSession(paperID, true);
+  updateSessionList(paperID, sessionID, true);
 }
 
 /********************************************************************
@@ -253,16 +262,32 @@ function processSender(ui, paperID){
   if(numPapers === 0){
     Sessions.remove(senderID);
   }
+
+  return senderID;
 }
 
 /********************************************************************
 * Convenience function used to update items in the Papers Collection*
 ********************************************************************/
-function updatePaper(paperID, inSession){
+function updateInSession(paperID, inSession){
   Papers.update({_id: paperID}, 
     {$set:
       {inSession: inSession}
   });
+}
+
+function updateSessionList(paperID, sessionID, adding){
+  if (adding){
+    Papers.update({_id: paperID}, 
+      {$addToSet:
+        {sessions: sessionID}
+    });
+  } else {
+    Papers.update({_id: paperID}, 
+      {$pull:
+        {sessions: sessionID}
+    });
+  }
 }
 
 
