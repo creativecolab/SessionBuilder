@@ -8,7 +8,7 @@ Paper = function(id, title){
 	this.sessions = [];
 }
 
-Papers.initEasySearch(['title']);
+//Papers.initEasySearch(['title']);
 
 ConfSession = function(papers){
 	this.papers = papers;
