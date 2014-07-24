@@ -8,6 +8,8 @@ Paper = function(id, title){
 	this.sessions = [];
 }
 
+Papers.initEasySearch(['title']);
+
 ConfSession = function(papers){
 	this.papers = papers;
 	this.name = "Not named yet";
